@@ -1,10 +1,7 @@
-import telethon
-
+from telethon import TelegramClient, events
+import json
 import requests
 
-import json
-
- from telethon.sync import TelegramClient
 
 api_id = 12345
 api_hash = '0123456789abcdef0123456789abcdef'
