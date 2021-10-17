@@ -1,8 +1,18 @@
+import telethon
+
 import requests
 
 import json
 
- 
+ from telethon.sync import TelegramClient
+
+api_id = 12345
+api_hash = '0123456789abcdef0123456789abcdef'
+bot_token = '12345:0123456789abcdef0123456789abcdef'
+
+
+bot = TelegramClient('bot', api_id, api_hash).start(bot_token=bot_token)
+
 
 servers=json.loads(requests.get('https://single-developers.herokuapp.com/servers').content)
 
