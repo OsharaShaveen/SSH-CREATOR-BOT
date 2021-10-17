@@ -11,6 +11,35 @@ bot_token = '12345:0123456789abcdef0123456789abcdef'
 bot = TelegramClient('bot', api_id, api_hash).start(bot_token=bot_token)
 
 
+
+
+def stat(qq):
+  url = "https://api.telegram.org/bot"+BOTT+"/sendphoto"
+  data = {
+    "chat_id": str(qq),
+    "photo": "Your Banner Image Link",
+    "caption": "Hello ! \n I'm Doenets.lk Bot \n\n What does I Know \n\n • G.C.E. (A/L) EXAMINATION - 2020 \n • G.C.E. (O/L) EXAMINATION (After Rescrutiny) - 2019 \n • GRADE 5 SCHOLARSHIP EXAMINATION (AFTER APPES) - 2020 \n\n ~ @Uvindu_Bro 🇱🇰 ",
+    "parse_mode": "HTML",
+    "reply_markup": {
+        "inline_keyboard": [
+            [
+                {
+                    "text": "➕ Add me to your Group",
+                    "url": "https://t.me/DonentsLKBot?startgroup=new"
+                }, 
+                {
+                    "text": "🔊 Channel",
+                    "url": "https://t.me/UvinduBro"
+                }
+            ]
+        ]
+    }
+}
+
+
+  headers = {'Content-type': 'application/json'}
+  r = requests.post(url, data=json.dumps(data), headers=headers)
+
 servers=json.loads(requests.get('https://single-developers.herokuapp.com/servers').content)
 
 for server in servers:
@@ -119,8 +148,55 @@ except:
 
     print(ssh_result)
 
- 
 
- 
 
-Api by 
+
+
+
+# Start Command
+
+@bot.on(events.NewMessage(pattern='/start'))
+async def start(event):
+    stat(event.original_update.message.peer_id.user_id)
+    raise events.StopPropagation
+
+
+# AL result Command
+
+@bot.on(events.NewMessage(pattern='/al'))
+async def ALresult(event):
+    indexx=str(event.raw_text).split(' ')
+    print(indexx)
+    await event.respond(Al(indexx[1]),parse_mode='html')
+    raise events.StopPropagation
+
+
+#Ol Result Command
+
+@bot.on(events.NewMessage(pattern='/ol'))
+async def OLresult(event):
+    olindexx=str(event.raw_text).split(' ')
+    print(olindexx)
+    await event.respond(Ol(olindexx[1]),parse_mode='html')
+    raise events.StopPropagation
+
+
+#Grade 5 Scholarship Command
+
+@bot.on(events.NewMessage(pattern='/g5'))
+async def G5result(event):
+    g5indexx=str(event.raw_text).split(' ')
+    print(g5indexx)
+    await event.respond(G5(g5indexx[1]),parse_mode='html')
+    raise events.StopPropagation
+
+
+    
+
+
+def main():
+    """Start the bot. \n \n ~ @UvinduBro"""
+    bot.run_until_disconnected()
+
+if __name__ == '__main__':
+    main()
