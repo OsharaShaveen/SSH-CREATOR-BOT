@@ -69,4 +69,4 @@ langdetect
 aria2p
 fontTools
 PyDictionary
-telethon
+
